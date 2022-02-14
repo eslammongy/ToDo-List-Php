@@ -79,5 +79,16 @@ require 'db_connection.php';
         } ?>
     </div>
 </div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function (){
+     $('.remove-to-do').click(function (){
+         const id = $(this).attr('id');
+         alert(id)
+
+        /* $.post("app/RemoveTodo.php");*/
+     });
+    });
+</script>
 </body>
 </html>
