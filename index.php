@@ -61,8 +61,8 @@ require 'db_connection.php';
                 <?php
                 if ($todo['checked']) { ?>
                     <label>
-                        <input class="check-box" type="checkbox" data-todo-id="<?php
-                        echo $todo['id'] ?>" checked>
+                        <input class="check-box" type="checkbox"
+                               data-todo-id="<?php echo $todo['id']; ?>" checked>
                     </label>
                     <h2 class="checked"><?php
                         echo $todo['title'] ?></h2>
@@ -71,7 +71,7 @@ require 'db_connection.php';
                     <label>
                         <input class="check-box"
                                data-todo-id="<?php
-                               echo $todo['id'] ?>"
+                               echo $todo['id']; ?>"
                                type="checkbox">
                     </label>
                     <h2><?php
@@ -105,6 +105,19 @@ require 'db_connection.php';
             const id = $(this).attr('data-todo-id');
 
             $.post('app/CheckTodo.php',
+                {
+                    id: id
+                },
+                (data) => {
+                    if (data != "Error") {
+                    const h2 = $(this).next();
+                    if (data === 1){
+                        h2.removeClass('checked');
+                    }else{
+                        h2.addClass('checked');
+                    }
+                    }
+                }
             );
         });
     });
