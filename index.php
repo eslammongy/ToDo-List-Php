@@ -18,20 +18,23 @@ require 'db_connection.php';
 <div class="main-section">
     <div class="adding-todo-section">
         <form action="app/addingTask.php" method="post" autocomplete="off">
-            <?php if(isset($_GET['mess']) && $_GET['mess'] == 'error'){ ?>
+            <?php
+            if (isset($_GET['mess']) && $_GET['mess'] == 'error') { ?>
                 <label>
                     <input type="text" name="title" placeholder="please enter the todo title"
                            style="border-color: red"
                     />
                 </label>
                 <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
-            <?php }else{?>
-            <label>
-                <input type="text" name="title" placeholder="What do you need to do today?"
-                />
-            </label>
-            <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
-            <?php } ?>
+                <?php
+            } else { ?>
+                <label>
+                    <input type="text" name="title" placeholder="What do you need to do today?"
+                    />
+                </label>
+                <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
+                <?php
+            } ?>
         </form>
     </div>
     <!-- start displays the todos list section-->
@@ -58,36 +61,52 @@ require 'db_connection.php';
                 <?php
                 if ($todo['checked']) { ?>
                     <label>
-                        <input class="check-box" type="checkbox" checked>
+                        <input class="check-box" type="checkbox" data-todo-id="<?php
+                        echo $todo['id'] ?>" checked>
                     </label>
                     <h2 class="checked"><?php
                         echo $todo['title'] ?></h2>
-                <?php
+                    <?php
                 } else { ?>
                     <label>
-                        <input class="check-box" type="checkbox">
+                        <input class="check-box"
+                               data-todo-id="<?php
+                               echo $todo['id'] ?>"
+                               type="checkbox">
                     </label>
                     <h2><?php
                         echo $todo['title'] ?></h2>
-                <?php
+                    <?php
                 } ?>
                 <br>
                 <small>created: <?php
                     echo $todo['date_time'] ?></small>
             </div>
-        <?php
+            <?php
         } ?>
     </div>
 </div>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script>
-    $(document).ready(function (){
-     $('.remove-to-do').click(function (){
-         const id = $(this).attr('id');
-         alert(id)
+    $(document).ready(function () {
+        $('.remove-to-do').click(function () {
+            const id = $(this).attr('id');
+            $.post("app/RemoveTodo.php", {
+                    id: id
+                },
+                (data) => {
+                    if (data) {
+                        $(this).parent().hide(600);
+                    }
+                }
+            );
+        });
+        $(".check-box").click(function (e) {
+            const id = $(this).attr('data-todo-id');
 
-        /* $.post("app/RemoveTodo.php");*/
-     });
+            $.post('app/CheckTodo.php',
+            );
+        });
     });
 </script>
 </body>
