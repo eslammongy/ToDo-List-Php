@@ -17,12 +17,21 @@ require 'db_connection.php';
 <!-- start adding new todos section-->
 <div class="main-section">
     <div class="adding-todo-section">
-        <form action="">
+        <form action="app/addingTask.php" method="post" autocomplete="off">
+            <?php if(isset($_GET['mess']) && $_GET['mess'] == 'error'){ ?>
+                <label>
+                    <input type="text" name="title" placeholder="please enter the todo title"
+                           style="border-color: red"
+                    />
+                </label>
+                <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
+            <?php }else{?>
             <label>
-                <input type="text" name="title" placeholder="please enter the todo title"
+                <input type="text" name="title" placeholder="What do you need to do today?"
                 />
             </label>
             <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
+            <?php } ?>
         </form>
     </div>
     <!-- start displays the todos list section-->

@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 class DbConnection
 {
 
@@ -22,6 +24,11 @@ class DbConnection
             echo "<h1 style='text-align: center;color: red'>Connection Field</h1> :" . $exception->getMessage();
         }
         return $this->dbConnect;
+    }
+
+    public function closeConnection() {
+        $this->dbConnect = null;
+        exit();
     }
 
 }
