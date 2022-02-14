@@ -11,7 +11,7 @@ body {
 
 .main-section {
     background: transparent;
-    max-width: 500px;
+    max-width: 80%;
     width: 90%;
     height: 100px;
     margin: 30px auto;
@@ -19,7 +19,8 @@ body {
 }
 
 .adding-todo-section {
-    width: 100%;
+    width: 80%;
+    height: 150px;
     background: #fff;
     margin: 0px auto;
     padding: 10px;
@@ -40,8 +41,8 @@ body {
 .adding-todo-section button {
     display: block;
     width: 95%;
-    height: 40px;
-    margin: 0 auto;
+    height: 50px;
+    margin: 20px auto;
     border: none;
     outline: none;
     background: #0088FF;
@@ -55,6 +56,7 @@ body {
 .adding-todo-section button:hover {
     box-shadow: 0 2px 2px 0 #ccc, 0 2px 3px 0 #ccc;
     opacity: 0.7;
+    align-content: center;
 }
 
 .adding-todo-section button span {

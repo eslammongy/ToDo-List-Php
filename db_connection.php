@@ -14,7 +14,7 @@ class DbConnection
         try
         {
             $this->dbConnect = new PDO($this->server, $this->userName,$this->password,$this->options);
-            echo "<h1 style='text-align: center;color: orangered'>Connection Success</h1>";
+            //echo "<h1 style='text-align: center;color: orangered'>Connection Success</h1>";
             return $this->dbConnect;
         }
         catch (PDOException $exception)

@@ -25,23 +25,50 @@ require 'db_connection.php';
             <button type="submit" class="add-todo-btn">Add &nbsp; <span>&#43;</span></button>
         </form>
     </div>
-</div>
-<!-- start displays the todos list section-->
-<?php
-$todos = new DbConnection();
-$db = $todos->openDbConnection();
+    <!-- start displays the todos list section-->
+    <?php
+    $pdoConnect = new DbConnection();
+    $todos = $pdoConnect->openDbConnection()->query("SELECT * FROM todos ORDER BY id DESC ");
 
-?>
-<div class="display-todos-section">
-    <div class="todo-item-curd">
-        <label>
-            <input type="checkbox">
-        </label>
-        <h2>This is the first task today</h2>
-        <br>
-        <small>created: 3/8/2022</small>
+    ?>
+    <div class="display-todos-section">
+        <?php
+        if ($todos->rowCount() <= 0) { ?>
+            <div class="todo-item-curd">
+                <div class="empty">
+                    <img src="images/homework.png" alt="No Tasks Included Yet !!" width="40%">
+                </div>
+            </div>
+            <?php
+        } ?>
+        <?php
+        while ($todo = $todos->fetch(PDO::FETCH_ASSOC)) { ?>
+            <div class="todo-item-curd">
+                <span id="<?php
+                echo $todo['id'] ?>" class="remove-to-do">X</span>
+                <?php
+                if ($todo['checked']) { ?>
+                    <label>
+                        <input class="check-box" type="checkbox" checked>
+                    </label>
+                    <h2 class="checked"><?php
+                        echo $todo['title'] ?></h2>
+                <?php
+                } else { ?>
+                    <label>
+                        <input class="check-box" type="checkbox">
+                    </label>
+                    <h2><?php
+                        echo $todo['title'] ?></h2>
+                <?php
+                } ?>
+                <br>
+                <small>created: <?php
+                    echo $todo['date_time'] ?></small>
+            </div>
+        <?php
+        } ?>
     </div>
 </div>
-
 </body>
 </html>
