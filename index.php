@@ -1,3 +1,7 @@
+<?php
+
+require 'db_connection.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,15 +27,20 @@
     </div>
 </div>
 <!-- start displays the todos list section-->
+<?php
+$todos = new DbConnection();
+$db = $todos->openDbConnection();
+
+?>
 <div class="display-todos-section">
-  <div class="todo-item-curd">
-      <label>
-          <input type="checkbox">
-      </label>
-      <h2>This is the first task today</h2>
-      <br>
-      <small>created: 3/8/2022</small>
-  </div>
+    <div class="todo-item-curd">
+        <label>
+            <input type="checkbox">
+        </label>
+        <h2>This is the first task today</h2>
+        <br>
+        <small>created: 3/8/2022</small>
+    </div>
 </div>
 
 </body>
